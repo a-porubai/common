@@ -1,10 +1,5 @@
 package gamehdl
 
-import (
-	"github.com/gin-gonic/gin"
-	"github.com/matiasvarela/minesweeper-hex-arch-sample/internal/core/ports"
-)
-
 type HTTPHandler struct {
 	gamesService ports.GamesService
 }
@@ -15,8 +10,8 @@ func NewHTTPHandler(gamesService ports.GamesService) *HTTPHandler {
 	}
 }
 
-func (hdl *HTTPHandler) Get(c *gin.Context) {
-	game, err := hdl.gamesService.Get(c.Param("id"))
+func (h *HTTPHandler) Get(c *gin.Context) {
+	game, err := h.gamesService.Get(c.Param("id"))
 	if err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
 		return
